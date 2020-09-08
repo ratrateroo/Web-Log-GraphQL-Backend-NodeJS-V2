@@ -1,5 +1,7 @@
 const express = require('express');
 
+const HttpError = require('../models/http-error');
+
 const router = express.Router();
 
 const image = 'Images here';
@@ -124,9 +126,7 @@ router.get('/:bid', (req, res, next) => {
 	});
 
 	if (!blog) {
-		const error = new Error('Could not find a blog for the provided id.');
-		error.code = 404;
-		throw error;
+		return new HttpError('Could not find a blog for the provided id.', 404);
 	}
 
 	res.json({ blog });
@@ -140,11 +140,9 @@ router.get('/user/:uid', (req, res, next) => {
 	});
 
 	if (!blog) {
-		const error = new Error(
-			'Could not find a blog for the provided user id.'
+		return next(
+			new HttpError('Could not find a blog for the provided user id.', 404)
 		);
-		error.code = 404;
-		return next(error);
 	}
 
 	res.json({ blog: blog });
