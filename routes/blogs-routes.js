@@ -123,6 +123,12 @@ router.get('/:bid', (req, res, next) => {
 		return blog.id === blogId;
 	});
 
+	if (!blog) {
+		const error = new Error('Could not find a blog for the provided id.');
+		error.code = 404;
+		throw error;
+	}
+
 	res.json({ blog });
 });
 
@@ -132,6 +138,14 @@ router.get('/user/:uid', (req, res, next) => {
 	const blog = BLOGS.find((blog) => {
 		return blog.creator === userId;
 	});
+
+	if (!blog) {
+		const error = new Error(
+			'Could not find a blog for the provided user id.'
+		);
+		error.code = 404;
+		return next(error);
+	}
 
 	res.json({ blog: blog });
 });
