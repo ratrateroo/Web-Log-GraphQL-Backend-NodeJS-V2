@@ -13,6 +13,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b2',
@@ -22,6 +23,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b3',
@@ -31,6 +33,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b4',
@@ -40,6 +43,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b5',
@@ -49,6 +53,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b6',
@@ -58,6 +63,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b7',
@@ -67,6 +73,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u1',
 	},
 	{
 		id: 'b8',
@@ -76,6 +83,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u2',
 	},
 
 	{
@@ -86,6 +94,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u2',
 	},
 	{
 		id: 'b10',
@@ -95,6 +104,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u2',
 	},
 	{
 		id: 'b11',
@@ -104,6 +114,7 @@ const BLOGS = [
 		category: 'Javascript',
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
+		creator: 'u2',
 	},
 ];
 router.get('/:bid', (req, res, next) => {
@@ -113,6 +124,16 @@ router.get('/:bid', (req, res, next) => {
 	});
 
 	res.json({ blog });
+});
+
+router.get('/user/:uid', (req, res, next) => {
+	const userId = req.params.uid;
+
+	const blog = BLOGS.find((blog) => {
+		return blog.creator === userId;
+	});
+
+	res.json({ blog: blog });
 });
 
 module.exports = router;
