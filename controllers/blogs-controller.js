@@ -180,7 +180,11 @@ const updateBlog = (req, res, next) => {
 	res.status(200).json({ blog: updatedBlog });
 };
 
-const deleteBlog = (req, res, next) => {};
+const deleteBlog = (req, res, next) => {
+	const blogId = req.body.bid;
+	BLOGS = BLOGS.filter((blog) => blog.id !== blogId); //true will be fillered out from the array
+	res.status(200).json({ message: 'Blog deleted' });
+};
 
 exports.getBlogById = getBlogById;
 exports.getBlogsByUserId = getBlogsByUserId;
