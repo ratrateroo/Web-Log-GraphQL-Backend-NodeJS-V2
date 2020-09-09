@@ -5,6 +5,8 @@ const blogsRoutes = require('./routes/blogs-routes');
 
 const app = express();
 
+app.use(bodyParser.json());
+
 app.use('/blogs', blogsRoutes);
 
 app.use((error, req, res, next) => {
