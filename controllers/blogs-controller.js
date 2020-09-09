@@ -129,16 +129,16 @@ const getBlogById = (req, res, next) => {
 
 const getBlogsByUserId = (req, res, next) => {
 	const userId = req.params.uid;
-	const blog = BLOGS.find((blog) => {
+	const blogs = BLOGS.filter((blog) => {
 		return blog.creator === userId;
 	});
 
-	if (!blog) {
+	if (!blogs || blogs.length === 0) {
 		return next(
-			new HttpError('Could not find a blog for the provided user id.', 404)
+			new HttpError('Could not find blogs for the provided user id.', 404)
 		);
 	}
-	res.json({ blog: blog });
+	res.json({ blogs: blogs });
 };
 
 const createBlog = (req, res, next) => {
