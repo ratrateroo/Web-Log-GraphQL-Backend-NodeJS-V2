@@ -13,4 +13,8 @@ router.get('/user/:uid', blogsControllers.getBlogsByUserId);
 
 router.post('/', blogsControllers.createBlog);
 
+router.patch('/:bid', blogsControllers.updateBlog);
+
+router.delete('/:bid', blogsControllers.deleteBlog);
+
 module.exports = router;

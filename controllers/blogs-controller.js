@@ -120,7 +120,6 @@ const getBlogById = (req, res, next) => {
 	const blog = BLOGS.find((blog) => {
 		return blog.id === blogId;
 	});
-
 	if (!blog) {
 		return new HttpError('Could not find a blog for the provided id.', 404);
 	}
@@ -130,7 +129,6 @@ const getBlogById = (req, res, next) => {
 
 const getBlogsByUserId = (req, res, next) => {
 	const userId = req.params.uid;
-
 	const blog = BLOGS.find((blog) => {
 		return blog.creator === userId;
 	});
@@ -140,7 +138,6 @@ const getBlogsByUserId = (req, res, next) => {
 			new HttpError('Could not find a blog for the provided user id.', 404)
 		);
 	}
-
 	res.json({ blog: blog });
 };
 
@@ -170,6 +167,23 @@ const createBlog = (req, res, next) => {
 	res.status(201).json({ blog: createdBlog });
 };
 
+const updateBlog = (req, res, next) => {
+	const { title, author, category } = req.body;
+	const blogId = req.body.bid;
+
+	const updatedBlog = { ...BLOGS.find((blog) => blog.id === blogId) };
+	const blogIndex = BLOGS.findIndex((blog) => blog.id === blogId);
+	updatedBlog.title = title;
+	updatedBlog.author = author;
+	updatedBlog.category = category;
+	BLOGS[blogIndex] = updatedBlog;
+	res.status(200).json({ blog: updatedBlog });
+};
+
+const deleteBlog = (req, res, next) => {};
+
 exports.getBlogById = getBlogById;
 exports.getBlogsByUserId = getBlogsByUserId;
 exports.createBlog = createBlog;
+exports.updateBlog = updateBlog;
+exports.deleteBlog = deleteBlog;
