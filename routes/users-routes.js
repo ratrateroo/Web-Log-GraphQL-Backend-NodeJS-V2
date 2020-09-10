@@ -13,16 +13,8 @@ router.get('/profile/:uid', usersControllers.getUserProfile); //     /users/prof
 
 router.patch('/:uid', usersControllers.updateUserProfile); // PATCH    /users/:uid
 
-router.post('/', usersControllers.createUserProfile); // POST - Sign Up   /users/
+router.post('/signup', usersControllers.signup); // POST - Create Profile   /users/signup
 
-router.get('/:bid', usersControllers.getBlogById);
-
-router.get('/user/:uid', usersControllers.getBlogsByUserId);
-
-router.post('/', usersControllers.createBlog);
-
-router.patch('/:bid', usersControllers.updateBlog);
-
-router.delete('/:bid', usersControllers.deleteBlog);
+router.post('/login', usersControllers.login); // POST - Create Profile   /users/login
 
 module.exports = router;
