@@ -11,8 +11,8 @@ let USERS = [
 		middlename: 'Cabang',
 		lastname: 'Tarectecan',
 		profileimage: '',
-		blogs: 0,
-		friends: [{}],
+		blogs: [],
+		friends: [],
 	},
 	{
 		id: 'u1',
@@ -23,8 +23,8 @@ let USERS = [
 		middlename: 'Bar',
 		lastname: 'Nuts',
 		profileimage: '',
-		blogs: 0,
-		friends: [{}],
+		blogs: [],
+		friends: [],
 	},
 ];
 
@@ -107,7 +107,16 @@ const signup = (req, res, next) => {
 	res.status(201).json({ user: createdProfile });
 };
 
-const login = (req, res, next) => {};
+const login = (req, res, next) => {
+	const { username, password } = req.body;
+
+	const identifiedUser = USERS.find((user) => user.username === username);
+	if (!identifiedUser || user.password !== password) {
+		return new HttpError('Could not identify user.', 404);
+	}
+
+	res.status(201).json({ message: 'Logged In' });
+};
 exports.getUsers = getUsers;
 exports.getUserFriends = getUserFriends;
 exports.getUserProfile = getUserProfile;
