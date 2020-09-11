@@ -1,4 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
+const { validationResult } = require('express-validator');
+
 const HttpError = require('../models/http-error');
 const image = 'image here';
 const BLOGS = [
@@ -142,6 +144,13 @@ const getBlogsByUserId = (req, res, next) => {
 };
 
 const createBlog = (req, res, next) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors);
+		// res.json({ errors: errors });
+		throw new HttpError('Invalid inputs passed, check your data.', 422);
+	}
+
 	const {
 		image,
 		title,
