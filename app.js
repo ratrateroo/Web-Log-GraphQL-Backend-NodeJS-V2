@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const HttpError = require('./models/http-error');
 const blogsRoutes = require('./routes/blogs-routes');
 const usersRoutes = require('./routes/users-routes');
+const { urlencoded } = require('express');
 
 const app = express();
 
@@ -26,7 +27,9 @@ app.use((error, req, res, next) => {
 	res.json({ message: error.message || 'An unknown error occured!' });
 });
 mongoose
-	.connect()
+	.connect(
+		'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority'
+	)
 	.then(() => {
 		app.listen(5000);
 	})
