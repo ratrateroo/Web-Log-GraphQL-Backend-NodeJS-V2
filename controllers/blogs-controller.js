@@ -166,7 +166,7 @@ const getBlogsByUserId = (req, res, next) => {
 	res.json({ blogs: blogs });
 };
 
-const createBlog = (req, res, next) => {
+const createBlog = async (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors);
@@ -182,6 +182,7 @@ const createBlog = (req, res, next) => {
 		created,
 		updated,
 		creator,
+		content,
 	} = req.body;
 
 	const createdBlog = new Blog({
@@ -192,14 +193,22 @@ const createBlog = (req, res, next) => {
 		created,
 		updated,
 		creator,
+		content,
 	});
 
-	BLOGS.push(createdBlog);
+	try {
+		await createdBlog.save();
+	} catch (err) {
+		const error = new HttpError('Ceating blogs failed', 500);
+		return next(error);
+	}
+
+	// BLOGS.push(createdBlog);
 	res.status(201).json({ blog: createdBlog });
 };
 
 const updateBlog = (req, res, next) => {
-	const { title, author, category } = req.body;
+	const { title, author, category, content } = req.body;
 	const blogId = req.body.bid;
 
 	const updatedBlog = { ...BLOGS.find((blog) => blog.id === blogId) };
@@ -207,6 +216,7 @@ const updateBlog = (req, res, next) => {
 	updatedBlog.title = title;
 	updatedBlog.author = author;
 	updatedBlog.category = category;
+	updatedBlog.content = content;
 	BLOGS[blogIndex] = updatedBlog;
 	res.status(200).json({ blog: updatedBlog });
 };
