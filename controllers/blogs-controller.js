@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const image = 'image here';
+const Blog = require('../models/blog');
 const BLOGS = [
 	{
 		id: 'b1',
@@ -183,16 +184,15 @@ const createBlog = (req, res, next) => {
 		creator,
 	} = req.body;
 
-	const createdBlog = {
-		id: uuidv4(),
-		image,
+	const createdBlog = new Blog({
 		title,
+		image,
 		author,
 		category,
 		created,
 		updated,
 		creator,
-	};
+	});
 
 	BLOGS.push(createdBlog);
 	res.status(201).json({ blog: createdBlog });
