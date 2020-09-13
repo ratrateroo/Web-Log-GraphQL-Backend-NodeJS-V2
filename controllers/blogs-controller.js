@@ -13,6 +13,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b2',
@@ -23,6 +25,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b3',
@@ -33,6 +37,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b4',
@@ -43,6 +49,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b5',
@@ -53,6 +61,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b6',
@@ -63,6 +73,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b7',
@@ -73,6 +85,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u1',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b8',
@@ -83,6 +97,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u2',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 
 	{
@@ -94,6 +110,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u2',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b10',
@@ -104,6 +122,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u2',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 	{
 		id: 'b11',
@@ -114,6 +134,8 @@ const BLOGS = [
 		created: 'Jan-14-12',
 		updated: 'Jan-14-12',
 		creator: 'u2',
+		content:
+			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
 	},
 ];
 

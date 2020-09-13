@@ -28,9 +28,11 @@ app.use((error, req, res, next) => {
 });
 mongoose
 	.connect(
-		'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority'
+		'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority',
+		{ useNewUrlParser: true, useUnifiedTopology: true }
 	)
 	.then(() => {
+		console.log('Connected to the Database.');
 		app.listen(5000);
 	})
 	.catch((error) => {
