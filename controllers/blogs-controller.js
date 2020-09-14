@@ -140,13 +140,25 @@ const BLOGS = [
 	},
 ];
 
-const getBlogById = (req, res, next) => {
+const getBlogById = async (req, res, next) => {
 	const blogId = req.params.bid;
-	const blog = BLOGS.find((blog) => {
-		return blog.id === blogId;
-	});
+	let blog;
+	try {
+		blog = await Blog.findById(blogId);
+	} catch (error) {
+		const error = new HttpError(
+			'Something went wrong, could not find a blog',
+			500
+		);
+		return next(error);
+	}
+
 	if (!blog) {
-		return new HttpError('Could not find a blog for the provided id.', 404);
+		const error = new HttpError(
+			'Could not find a blog for the provided id.',
+			404
+		);
+		return next(error);
 	}
 
 	res.json({ blog });
