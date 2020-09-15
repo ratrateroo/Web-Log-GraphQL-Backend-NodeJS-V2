@@ -161,21 +161,21 @@ const getBlogById = async (req, res, next) => {
 		return next(error);
 	}
 
-	res.json({ blog });
+	res.json({ blog: blog.toObject({ getters: true }) });
 };
 
-const getBlogsByUserId = (req, res, next) => {
+const getBlogsByUserId = async (req, res, next) => {
 	const userId = req.params.uid;
-	const blogs = BLOGS.filter((blog) => {
-		return blog.creator === userId;
-	});
-
-	if (!blogs || blogs.length === 0) {
-		return next(
-			new HttpError('Could not find blogs for the provided user id.', 404)
+	let blogs;
+	try {
+		blogs = await Blog.find({ creator: userId });
+	} catch (error) {
+		const error = new HttpError(
+			'Fetching blogs failed, please try again later.',
+			500
 		);
 	}
-	res.json({ blogs: blogs });
+	return next(error);
 };
 
 const createBlog = async (req, res, next) => {
