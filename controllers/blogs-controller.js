@@ -174,8 +174,15 @@ const getBlogsByUserId = async (req, res, next) => {
 			'Fetching blogs failed, please try again later.',
 			500
 		);
+		return next(error);
 	}
-	return next(error);
+	if (!blogs || blogs.length === 0) {
+		return next(
+			new HttpError('Could not find a blog for the provided id.', 404)
+		);
+	}
+
+	res.json({ blogs: blogs.map((blog) => blog.toObject({ getters: true })) });
 };
 
 const createBlog = async (req, res, next) => {
