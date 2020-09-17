@@ -226,18 +226,45 @@ const createBlog = async (req, res, next) => {
 	res.status(201).json({ blog: createdBlog });
 };
 
-const updateBlog = (req, res, next) => {
+const updateBlog = async (req, res, next) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		throw new HttpError(
+			'Invalid inputs passed, please check your data.',
+			422
+		);
+	}
+
 	const { title, author, category, content } = req.body;
 	const blogId = req.body.bid;
 
-	const updatedBlog = { ...BLOGS.find((blog) => blog.id === blogId) };
-	const blogIndex = BLOGS.findIndex((blog) => blog.id === blogId);
-	updatedBlog.title = title;
-	updatedBlog.author = author;
-	updatedBlog.category = category;
-	updatedBlog.content = content;
-	BLOGS[blogIndex] = updatedBlog;
-	res.status(200).json({ blog: updatedBlog });
+	let blog;
+	try {
+		blog = await Blog.findById(blogId);
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not update blog.',
+			500
+		);
+		return next(error);
+	}
+
+	blog.title = title;
+	blog.author = author;
+	blog.category = category;
+	blog.content = content;
+
+	try {
+		await blog.save();
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not update blog.',
+			500
+		);
+		return next(error);
+	}
+
+	res.status(200).json({ blog: blog.toObject({ getters: true }) });
 };
 
 const deleteBlog = (req, res, next) => {
