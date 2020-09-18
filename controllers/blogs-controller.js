@@ -267,9 +267,17 @@ const updateBlog = async (req, res, next) => {
 	res.status(200).json({ blog: blog.toObject({ getters: true }) });
 };
 
-const deleteBlog = (req, res, next) => {
+const deleteBlog = async (req, res, next) => {
 	const blogId = req.body.bid;
-	BLOGS = BLOGS.filter((blog) => blog.id !== blogId); //true will be fillered out from the array
+
+	let blog;
+
+	try {
+		blog = await Blog.findById(placeId);
+	} catch (err) {
+		const error = new HttpError('Something went wrong.', 500);
+		return next(error);
+	}
 	res.status(200).json({ message: 'Blog deleted' });
 };
 
