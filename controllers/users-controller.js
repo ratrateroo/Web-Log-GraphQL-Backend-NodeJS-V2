@@ -1,6 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
-const HttpError = require('../models/http-error');
+const { validationResult } = require('express-validator');
 
+const HttpError = require('../models/http-error');
+const User = require('../models/user');
 let USERS = [
 	{
 		id: 'u0',
@@ -81,7 +83,7 @@ const updateUserProfile = (req, res, next) => {
 	res.status(200).json({ user: updateProfile });
 };
 
-const signup = (req, res, next) => {
+const signup = async (req, res, next) => {
 	const {
 		username,
 		password,
@@ -92,6 +94,24 @@ const signup = (req, res, next) => {
 		profileimage,
 	} = req.body;
 
+	let existingUser;
+	try {
+		existingUser = await User.findOne({ email: email });
+	} catch (err) {
+		const error = new HttpError(
+			'Signing up failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	if (existingUser) {
+		const error = new HttpError(
+			'User already exist, please login instead.',
+			422
+		);
+		return next(error);
+	}
 	const createdProfile = {
 		id: uuidv4(),
 		username,
