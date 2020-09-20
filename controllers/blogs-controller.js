@@ -190,7 +190,9 @@ const createBlog = async (req, res, next) => {
 	if (!errors.isEmpty()) {
 		console.log(errors);
 		// res.json({ errors: errors });
-		throw new HttpError('Invalid inputs passed, check your data.', 422);
+		return next(
+			new HttpError('Invalid inputs passed, check your data.', 422)
+		);
 	}
 
 	const {

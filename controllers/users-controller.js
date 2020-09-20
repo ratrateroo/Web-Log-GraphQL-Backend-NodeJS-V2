@@ -84,6 +84,15 @@ const updateUserProfile = (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors);
+		// res.json({ errors: errors });
+		return next(
+			new HttpError('Invalid inputs passed, check your data.', 422)
+		);
+	}
+
 	const {
 		username,
 		password,
