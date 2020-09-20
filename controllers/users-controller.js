@@ -112,19 +112,27 @@ const signup = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	const createdProfile = {
-		id: uuidv4(),
+	const createdUser = new User({
 		username,
-		password,
 		email,
+		password,
 		firstname,
 		middlename,
 		lastname,
-		profileimage,
-	};
+		image: profileimage,
+	});
 
-	USERS.push(createdProfile);
-	res.status(201).json({ user: createdProfile });
+	try {
+		await createdUser.save();
+	} catch (err) {
+		const error = new HttpError(
+			'Signing up failed, please try again later.',
+			500
+		);
+		return next(error);
+	}
+
+	res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
 const login = (req, res, next) => {

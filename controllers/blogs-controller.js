@@ -218,7 +218,7 @@ const createBlog = async (req, res, next) => {
 	try {
 		await createdBlog.save();
 	} catch (err) {
-		const error = new HttpError('Ceating blogs failed', 500);
+		const error = new HttpError('Creating blogs failed', 500);
 		return next(error);
 	}
 
