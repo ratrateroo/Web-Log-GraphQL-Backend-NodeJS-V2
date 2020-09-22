@@ -11,6 +11,7 @@ const userSchema = new Schema({
 	firstname: { type: String, required: true },
 	middlename: { type: String, required: true },
 	lastname: { type: String, required: true },
+	blogs: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Blog' }],
 });
 
 userSchema.plugin(uniqueValidator);
