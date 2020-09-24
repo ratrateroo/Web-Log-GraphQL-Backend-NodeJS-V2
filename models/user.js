@@ -12,6 +12,13 @@ const userSchema = new Schema({
 	middlename: { type: String, required: true },
 	lastname: { type: String, required: true },
 	blogs: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Blog' }],
+	friends: [
+		{
+			type: mongoose.Types.ObjectId,
+			required: true,
+			ref: 'User',
+		},
+	],
 });
 
 userSchema.plugin(uniqueValidator);

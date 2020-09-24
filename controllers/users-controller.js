@@ -139,6 +139,8 @@ const signup = async (req, res, next) => {
 		middlename,
 		lastname,
 		image: profileimage,
+		blogs: [],
+		friends: [],
 	});
 
 	try {
