@@ -217,8 +217,30 @@ const createBlog = async (req, res, next) => {
 		content,
 	});
 
+	let user;
+
 	try {
-		await createdBlog.save();
+		user = await User.findById(creator);
+	} catch (err) {
+		const error = new HttpError(
+			'Creating blog failded, please trye again',
+			500
+		);
+		return next(error);
+	}
+
+	if (!user) {
+		const error = new HttpError('Counld not find user for provided id', 404);
+		return next(error);
+	}
+	console.log(user);
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await createdBlog.save({ session: sess });
+		user.blogs.push(createdBlog);
+		await user.save({ session: sess });
 	} catch (err) {
 		const error = new HttpError('Creating blogs failed', 500);
 		return next(error);
