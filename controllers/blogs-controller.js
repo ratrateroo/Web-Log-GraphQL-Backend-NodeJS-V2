@@ -230,7 +230,7 @@ const createBlog = async (req, res, next) => {
 	}
 
 	if (!user) {
-		const error = new HttpError('Counld not find user for provided id', 404);
+		const error = new HttpError('Could not find user for provided id', 404);
 		return next(error);
 	}
 	console.log(user);
@@ -241,6 +241,7 @@ const createBlog = async (req, res, next) => {
 		await createdBlog.save({ session: sess });
 		user.blogs.push(createdBlog);
 		await user.save({ session: sess });
+		await sess.commitTransaction();
 	} catch (err) {
 		const error = new HttpError('Creating blogs failed', 500);
 		return next(error);
@@ -295,13 +296,33 @@ const deleteBlog = async (req, res, next) => {
 	const blogId = req.body.bid;
 
 	let blog;
-
 	try {
-		blog = await Blog.findById(placeId);
+		blog = await (await Blog.findById(placeId)).populated('creator');
 	} catch (err) {
 		const error = new HttpError('Something went wrong.', 500);
 		return next(error);
 	}
+
+	if (!blog) {
+		const error = new HttpError('Could not find blog for this id.', 404);
+		return next(error);
+	}
+
+	try {
+		const sess = await mongoose.startSession();
+		sess.startTransaction();
+		await blog.remove({ session: sess });
+		blog.creator.blogs.pull(blog);
+		await blog.creator.save({ session: sess });
+		await sess.commitTransaction();
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not delete blog.',
+			500
+		);
+		return next(error);
+	}
+
 	res.status(200).json({ message: 'Blog deleted' });
 };
 
