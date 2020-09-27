@@ -166,9 +166,10 @@ const getBlogById = async (req, res, next) => {
 
 const getBlogsByUserId = async (req, res, next) => {
 	const userId = req.params.uid;
-	let blogs;
+	//let blogs;
+	let userWithBlogs;
 	try {
-		blogs = await Blog.find({ creator: userId });
+		userWithBlogs = await User.findById(userId).populate('blogs');
 	} catch (error) {
 		const error = new HttpError(
 			'Fetching blogs failed, please try again later.',
@@ -176,13 +177,17 @@ const getBlogsByUserId = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	if (!blogs || blogs.length === 0) {
+	if (!userWithBlogs || userWithBlogs.blogs.length === 0) {
 		return next(
 			new HttpError('Could not find a blog for the provided id.', 404)
 		);
 	}
 
-	res.json({ blogs: blogs.map((blog) => blog.toObject({ getters: true })) });
+	res.json({
+		blogs: userWithBlogs.blogs.map((blog) =>
+			blog.toObject({ getters: true })
+		),
+	});
 };
 
 const createBlog = async (req, res, next) => {
