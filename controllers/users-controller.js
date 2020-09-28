@@ -3,32 +3,32 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-let USERS = [
-	{
-		id: 'u0',
-		username: 'username',
-		password: 'password',
-		email: 'email@email.com',
-		firstname: 'Mark Leo',
-		middlename: 'Cabang',
-		lastname: 'Tarectecan',
-		profileimage: '',
-		blogs: [],
-		friends: [],
-	},
-	{
-		id: 'u1',
-		username: 'username1',
-		password: 'password',
-		email: 'user1@email.com',
-		firstname: 'Aurora',
-		middlename: 'Bar',
-		lastname: 'Nuts',
-		profileimage: '',
-		blogs: [],
-		friends: [],
-	},
-];
+// let USERS = [
+// 	{
+// 		id: 'u0',
+// 		username: 'username',
+// 		password: 'password',
+// 		email: 'email@email.com',
+// 		firstname: 'Mark Leo',
+// 		middlename: 'Cabang',
+// 		lastname: 'Tarectecan',
+// 		profileimage: '',
+// 		blogs: [],
+// 		friends: [],
+// 	},
+// 	{
+// 		id: 'u1',
+// 		username: 'username1',
+// 		password: 'password',
+// 		email: 'user1@email.com',
+// 		firstname: 'Aurora',
+// 		middlename: 'Bar',
+// 		lastname: 'Nuts',
+// 		profileimage: '',
+// 		blogs: [],
+// 		friends: [],
+// 	},
+// ];
 
 const getUsers = async (req, res, next) => {
 	let users;

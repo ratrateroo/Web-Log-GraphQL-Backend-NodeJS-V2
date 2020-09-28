@@ -166,7 +166,7 @@ const getBlogById = async (req, res, next) => {
 
 const getBlogsByUserId = async (req, res, next) => {
 	const userId = req.params.uid;
-	//let blogs;
+
 	let userWithBlogs;
 	try {
 		userWithBlogs = await User.findById(userId).populate('blogs');
@@ -194,7 +194,7 @@ const createBlog = async (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors);
-		// res.json({ errors: errors });
+
 		return next(
 			new HttpError('Invalid inputs passed, check your data.', 422)
 		);
