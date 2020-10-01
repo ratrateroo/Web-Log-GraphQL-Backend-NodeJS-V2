@@ -145,7 +145,7 @@ const getBlogById = async (req, res, next) => {
 	let blog;
 	try {
 		blog = await Blog.findById(blogId);
-	} catch (error) {
+	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not find a blog',
 			500
@@ -170,7 +170,7 @@ const getBlogsByUserId = async (req, res, next) => {
 	let userWithBlogs;
 	try {
 		userWithBlogs = await User.findById(userId).populate('blogs');
-	} catch (error) {
+	} catch (err) {
 		const error = new HttpError(
 			'Fetching blogs failed, please try again later.',
 			500

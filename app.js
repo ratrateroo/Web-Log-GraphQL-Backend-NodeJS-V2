@@ -26,9 +26,13 @@ app.use((error, req, res, next) => {
 	res.status(error.code || 500);
 	res.json({ message: error.message || 'An unknown error occured!' });
 });
+
+const url = 'mongodb://127.0.0.1:27017';
+//const url = 'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority';
+
 mongoose
 	.connect(
-		'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority',
+		url,
 		{ useNewUrlParser: true, useUnifiedTopology: true }
 	)
 	.then(() => {
