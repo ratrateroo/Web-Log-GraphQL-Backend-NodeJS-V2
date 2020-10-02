@@ -23,11 +23,19 @@ const blogSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	created: {
+	datecreated: {
 		type: String,
 		required: true,
 	},
-	updated: {
+	dateedited: {
+		type: String,
+		required: true,
+	},
+	likes: {
+		type: String,
+		required: true,
+	},
+	comments: {
 		type: String,
 		required: true,
 	},
