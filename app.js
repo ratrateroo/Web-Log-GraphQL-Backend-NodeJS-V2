@@ -11,6 +11,17 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+	);
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+
+	next();
+});
+
 app.use('/blogs', blogsRoutes);
 app.use('/users', usersRoutes);
 
@@ -27,16 +38,18 @@ app.use((error, req, res, next) => {
 	res.json({ message: error.message || 'An unknown error occured!' });
 });
 
-const url = 'mongodb://127.0.0.1:27017';
+//const url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb://127.0.0.1:27017/weblogversion2';
 //const url = 'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority';
 
 mongoose
-	.connect(
-		url,
-		{ useNewUrlParser: true, useUnifiedTopology: true }
-	)
+	.connect(url, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+	})
 	.then(() => {
-		console.log('Connected to the Database.');
+		console.log('Connected to database: ' + mongoose.connection.name);
 		app.listen(5000);
 	})
 	.catch((error) => {

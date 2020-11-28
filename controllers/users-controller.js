@@ -74,7 +74,7 @@ const updateUserProfile = (req, res, next) => {
 		firstname,
 		middlename,
 		lastname,
-		profileimage,
+		image,
 	} = req.body;
 	const userId = req.body.uid;
 
@@ -87,7 +87,7 @@ const updateUserProfile = (req, res, next) => {
 	updateProfile.firstname = firstname;
 	updateProfile.middlename = middlename;
 	updateProfile.lastname = lastname;
-	updateProfile.profileimage = profileimage;
+	updateProfile.image = image;
 	USERS[userIndex] = updateProfile;
 
 	res.status(200).json({ user: updateProfile });
@@ -110,7 +110,9 @@ const signup = async (req, res, next) => {
 		firstname,
 		middlename,
 		lastname,
-		profileimage,
+		// image,
+		// friends,
+		// blogs,
 	} = req.body;
 
 	let existingUser;
@@ -118,7 +120,7 @@ const signup = async (req, res, next) => {
 		existingUser = await User.findOne({ email: email });
 	} catch (err) {
 		const error = new HttpError(
-			'Signing up failed, please try again later.',
+			'Signing up failed, please try again later FindOne.',
 			500
 		);
 		return next(error);
@@ -138,22 +140,22 @@ const signup = async (req, res, next) => {
 		firstname,
 		middlename,
 		lastname,
-		image: profileimage,
+		image: 'testimage',
 		blogs: [],
 		friends: [],
 	});
+
+	console.log(createdUser);
 
 	try {
 		await createdUser.save();
 	} catch (err) {
 		const error = new HttpError(
-			'Signing up failed, please try again later.',
+			'Signing up failed, undable to save data, please try again later.',
 			500
 		);
 		return next(error);
 	}
-
-	res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
 const login = async (req, res, next) => {
