@@ -41,7 +41,10 @@ const getUsers = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	res.json({ users: users.map((user) => user.toObject({ getters: true })) });
+	const reply = res.json({
+		users: users.map((user) => user.toObject({ getters: true })),
+	});
+	console.log(reply);
 };
 
 const getUserFriends = (req, res, next) => {
@@ -156,6 +159,7 @@ const signup = async (req, res, next) => {
 		);
 		return next(error);
 	}
+	res.status(201).json({ message: 'Signed up succesfully.' });
 };
 
 const login = async (req, res, next) => {
