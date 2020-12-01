@@ -23,11 +23,11 @@ const blogSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	datecreated: {
+	created: {
 		type: String,
 		required: true,
 	},
-	dateedited: {
+	edited: {
 		type: String,
 		required: true,
 	},

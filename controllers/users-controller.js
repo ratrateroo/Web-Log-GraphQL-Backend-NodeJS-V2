@@ -41,10 +41,9 @@ const getUsers = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	const reply = res.json({
+	return res.json({
 		users: users.map((user) => user.toObject({ getters: true })),
 	});
-	console.log(reply);
 };
 
 const getUserFriends = (req, res, next) => {
@@ -159,7 +158,10 @@ const signup = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	res.status(201).json({ message: 'Signed up succesfully.' });
+	res.status(201).json({
+		user: createdUser.toObject({ getters: true }),
+		message: 'Signed up successfully.',
+	});
 };
 
 const login = async (req, res, next) => {
@@ -184,7 +186,10 @@ const login = async (req, res, next) => {
 		return next(error);
 	}
 
-	res.status(201).json({ message: 'Logged In' });
+	res.status(201).json({
+		user: existingUser.toObject({ getters: true }),
+		message: 'Logged In',
+	});
 };
 exports.getUsers = getUsers;
 exports.getUserFriends = getUserFriends;

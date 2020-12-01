@@ -1,9 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 
 const HttpError = require('../models/http-error');
 const image = 'image here';
 const Blog = require('../models/blog');
+const User = require('../models/user');
 const BLOGS = [
 	{
 		id: 'b1',
@@ -191,6 +193,7 @@ const getBlogsByUserId = async (req, res, next) => {
 };
 
 const createBlog = async (req, res, next) => {
+	console.log(req.body);
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors);
@@ -206,9 +209,11 @@ const createBlog = async (req, res, next) => {
 		author,
 		category,
 		created,
-		updated,
+		edited,
 		creator,
 		content,
+		likes,
+		comments,
 	} = req.body;
 
 	const createdBlog = new Blog({
@@ -217,9 +222,11 @@ const createBlog = async (req, res, next) => {
 		author,
 		category,
 		created,
-		updated,
+		edited,
 		creator,
 		content,
+		likes,
+		comments,
 	});
 
 	let user;
@@ -228,9 +235,10 @@ const createBlog = async (req, res, next) => {
 		user = await User.findById(creator);
 	} catch (err) {
 		const error = new HttpError(
-			'Creating blog failded, please trye again',
+			'Creating blog failded, please try again',
 			500
 		);
+		console.log(err);
 		return next(error);
 	}
 
@@ -249,6 +257,7 @@ const createBlog = async (req, res, next) => {
 		await sess.commitTransaction();
 	} catch (err) {
 		const error = new HttpError('Creating blogs failed', 500);
+		console.log(err);
 		return next(error);
 	}
 
@@ -336,3 +345,12 @@ exports.getBlogsByUserId = getBlogsByUserId;
 exports.createBlog = createBlog;
 exports.updateBlog = updateBlog;
 exports.deleteBlog = deleteBlog;
+
+config = {
+	_id: 'introRep',
+	members: [
+		{ _id: 0, host: 'localhost:27017' },
+		{ _id: 1, host: 'localhost:27018' },
+		{ _id: 2, host: 'localhost:27019' },
+	],
+};
