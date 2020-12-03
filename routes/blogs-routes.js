@@ -6,7 +6,7 @@ const blogsControllers = require('../controllers/blogs-controller');
 const router = express.Router();
 
 const image = 'Images here';
-
+router.get('/all', blogsControllers.getBlogs);
 router.get('/:bid', blogsControllers.getBlogById);
 
 router.get('/user/:uid', blogsControllers.getBlogsByUserId);
