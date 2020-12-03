@@ -155,9 +155,7 @@ const getBlogs = async (req, res, next) => {
 	}
 
 	res.json({
-		blogs: userWithBlogs.blogs.map((blog) =>
-			blog.toObject({ getters: true })
-		),
+		blogs: blogs.map((blog) => blog.toObject({ getters: true })),
 	});
 };
 
