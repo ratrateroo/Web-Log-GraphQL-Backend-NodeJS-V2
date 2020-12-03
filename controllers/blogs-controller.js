@@ -142,6 +142,25 @@ const BLOGS = [
 	},
 ];
 
+const getBlogs = async (req, res, next) => {
+	let blog;
+	try {
+		blogs = await Blog.find();
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not find a blog',
+			500
+		);
+		return next(error);
+	}
+
+	res.json({
+		blogs: userWithBlogs.blogs.map((blog) =>
+			blog.toObject({ getters: true })
+		),
+	});
+};
+
 const getBlogById = async (req, res, next) => {
 	const blogId = req.params.bid;
 	let blog;
@@ -339,7 +358,7 @@ const deleteBlog = async (req, res, next) => {
 
 	res.status(200).json({ message: 'Blog deleted' });
 };
-
+exports.getBlogs = getBlogs;
 exports.getBlogById = getBlogById;
 exports.getBlogsByUserId = getBlogsByUserId;
 exports.createBlog = createBlog;
