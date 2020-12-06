@@ -55,17 +55,28 @@ const getUserFriends = (req, res, next) => {
 	res.json({ friends: friends });
 };
 
-const getUserProfile = (req, res, next) => {
+const getUserProfile = async (req, res, next) => {
 	const userId = req.params.uid;
-	const user = USERS.find((user) => {
-		return user.id === userId;
-	});
-
+	console.log(userId);
+	let user;
+	try {
+		user = await User.findById(userId);
+	} catch (err) {
+		const error = new HttpError(
+			'Something went wrong, could not find the user.',
+			500
+		);
+		return next(error);
+	}
 	if (!user) {
-		return new HttpError('Could not find a user for the provided id.', 404);
+		const error = new HttpError(
+			'Could not find a user for the provided id.',
+			404
+		);
+		return next(error);
 	}
 
-	res.json({ user: user });
+	res.json({ user: user.toObject({ getters: true }) });
 };
 
 const updateUserProfile = (req, res, next) => {
