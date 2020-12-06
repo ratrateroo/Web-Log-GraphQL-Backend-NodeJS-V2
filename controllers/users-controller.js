@@ -60,7 +60,7 @@ const getUserProfile = async (req, res, next) => {
 	console.log(userId);
 	let user;
 	try {
-		user = await User.findById(userId);
+		user = await User.findById(userId).exec();
 	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not find the user.',
