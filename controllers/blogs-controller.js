@@ -291,8 +291,8 @@ const updateBlog = async (req, res, next) => {
 		);
 	}
 
-	const { title, author, category, content } = req.body;
-	const blogId = req.body.bid;
+	const { title, content, category, edited, created, author } = req.body;
+	const blogId = req.params.bid;
 
 	let blog;
 	try {
@@ -304,11 +304,24 @@ const updateBlog = async (req, res, next) => {
 		);
 		return next(error);
 	}
+	console.log(req.body);
 
+	// const newObject = {
+	// 	...blog,
+	// 	title: title,
+	// 	content: content,
+	// 	category: category,
+	// 	edited: edited,
+	// 	created: created,
+	// 	author: author,
+	// };
 	blog.title = title;
-	blog.author = author;
-	blog.category = category;
 	blog.content = content;
+	blog.category = category;
+	blog.edited = edited;
+	blog.created = created;
+	blog.author = author;
+	console.log(blog.title);
 
 	try {
 		await blog.save();
@@ -362,12 +375,3 @@ exports.getBlogsByUserId = getBlogsByUserId;
 exports.createBlog = createBlog;
 exports.updateBlog = updateBlog;
 exports.deleteBlog = deleteBlog;
-
-config = {
-	_id: 'introRep',
-	members: [
-		{ _id: 0, host: 'localhost:27017' },
-		{ _id: 1, host: 'localhost:27018' },
-		{ _id: 2, host: 'localhost:27019' },
-	],
-};
