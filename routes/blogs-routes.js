@@ -13,7 +13,11 @@ router.get('/user/:uid', blogsControllers.getBlogsByUserId);
 
 router.post('/', [check('title').not().isEmpty()], blogsControllers.createBlog);
 
-router.patch('/:bid', blogsControllers.updateBlog);
+router.patch(
+	'/:bid',
+	[check('title').not().isEmpty(), check('content').isLength({ min: 5 })],
+	blogsControllers.updateBlog
+);
 
 router.delete('/:bid', blogsControllers.deleteBlog);
 
