@@ -163,7 +163,7 @@ const getBlogById = async (req, res, next) => {
 	const blogId = req.params.bid;
 	let blog;
 	try {
-		blog = await Blog.findById(blogId);
+		blog = await Blog.findById(blogId).exec();
 	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not find a blog',
