@@ -1,6 +1,7 @@
 const express = require('express');
 
 const usersControllers = require('../controllers/users-controller');
+const fileUpload = require('../middleware/file-upload');
 const router = express.Router();
 
 const image = 'Images here';
@@ -13,7 +14,7 @@ router.get('/profile/:uid', usersControllers.getUserProfile); //     /users/prof
 
 router.patch('/:uid', usersControllers.updateUserProfile); // PATCH    /users/:uid
 
-router.post('/signup', usersControllers.signup); // POST - Create Profile   /users/signup
+router.post('/signup', fileUpload.single('image'), usersControllers.signup); // POST - Create Profile   /users/signup
 
 router.post('/login', usersControllers.login); // POST - Create Profile   /users/login
 
