@@ -337,13 +337,16 @@ const updateBlog = async (req, res, next) => {
 };
 
 const deleteBlog = async (req, res, next) => {
-	const blogId = req.body.bid;
+	const blogId = req.params.bid;
+
+	console.log('Request Body', req.params);
 
 	let blog;
 	try {
-		blog = await (await Blog.findById(placeId)).populated('creator');
+		blog = await Blog.findById(blogId).populate('creator');
 	} catch (err) {
-		const error = new HttpError('Something went wrong.', 500);
+		const error = new HttpError('Something went wrong.', 500, err);
+		console.log(err);
 		return next(error);
 	}
 
@@ -364,6 +367,7 @@ const deleteBlog = async (req, res, next) => {
 			'Something went wrong, could not delete blog.',
 			500
 		);
+		console.log(err);
 		return next(error);
 	}
 
