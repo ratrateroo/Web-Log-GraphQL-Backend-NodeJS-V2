@@ -153,7 +153,7 @@ const signup = async (req, res, next) => {
 		firstname,
 		middlename,
 		lastname,
-		image: 'testimage',
+		image: req.file.path.replace(/\\/g, '/'),
 		blogs: [],
 		friends: [],
 	});
