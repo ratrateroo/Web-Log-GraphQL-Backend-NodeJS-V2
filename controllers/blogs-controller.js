@@ -235,7 +235,7 @@ const createBlog = async (req, res, next) => {
 
 	const createdBlog = new Blog({
 		title,
-		image,
+		image: req.file.path,
 		author,
 		category,
 		created,
