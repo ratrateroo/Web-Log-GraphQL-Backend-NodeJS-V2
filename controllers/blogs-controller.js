@@ -153,7 +153,7 @@ const getBlogs = async (req, res, next) => {
 		);
 		return next(error);
 	}
-
+	console.log(blogs);
 	res.json({
 		blogs: blogs.map((blog) => blog.toObject({ getters: true })),
 	});
