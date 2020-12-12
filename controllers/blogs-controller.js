@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
@@ -355,6 +356,8 @@ const deleteBlog = async (req, res, next) => {
 		return next(error);
 	}
 
+	const imagePath = blog.image;
+
 	try {
 		const sess = await mongoose.startSession();
 		sess.startTransaction();
@@ -370,7 +373,9 @@ const deleteBlog = async (req, res, next) => {
 		console.log(err);
 		return next(error);
 	}
-
+	fs.unlink(imagePath, (err) => {
+		console.log(err);
+	});
 	res.status(200).json({ message: 'Blog deleted' });
 };
 exports.getBlogs = getBlogs;
