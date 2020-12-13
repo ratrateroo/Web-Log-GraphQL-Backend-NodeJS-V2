@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
@@ -181,11 +182,30 @@ const signup = async (req, res, next) => {
 			'Signing up failed, undable to save data, please try again later.',
 			500
 		);
+		console.log(err);
 		return next(error);
 	}
+
+	let token;
+	try {
+		token = jwt.sign(
+			{ userId: createdUser.id, email: createdUser.email },
+			'secretkey',
+			{ expiresIn: '1h' }
+		);
+	} catch (err) {
+		const error = new HttpError(
+			'Signing up failed, undable to save data, please try again later.',
+			500
+		);
+		console.log(err);
+		return next(error);
+	}
+
 	res.status(201).json({
-		user: createdUser.toObject({ getters: true }),
-		message: 'Signed up successfully.',
+		userId: createdUser.id,
+		email: createdUser.email,
+		token: token,
 	});
 };
 
@@ -200,6 +220,7 @@ const login = async (req, res, next) => {
 			'Logging in failed, please try again later.',
 			500
 		);
+		console.log(err);
 		return next(error);
 	}
 
