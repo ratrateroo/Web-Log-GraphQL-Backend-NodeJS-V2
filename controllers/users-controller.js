@@ -252,9 +252,26 @@ const login = async (req, res, next) => {
 		return next(error);
 	}
 
+	let token;
+	try {
+		token = jwt.sign(
+			{ userId: existingUser.id, email: existingUser.email },
+			'secretkey',
+			{ expiresIn: '1h' }
+		);
+	} catch (err) {
+		const error = new HttpError(
+			'Logging in failed, undable to save data, please try again later.',
+			500
+		);
+		console.log(err);
+		return next(error);
+	}
+
 	res.status(201).json({
-		user: existingUser.toObject({ getters: true }),
-		message: 'Logged In',
+		userId: createdUser.id,
+		email: createdUser.email,
+		token: token,
 	});
 };
 exports.getUsers = getUsers;
