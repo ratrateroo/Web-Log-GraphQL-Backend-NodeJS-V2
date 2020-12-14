@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const fileUpload = require('../middleware/file-upload');
 const blogsControllers = require('../controllers/blogs-controller');
+const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 
@@ -10,6 +11,8 @@ router.get('/all', blogsControllers.getBlogs);
 router.get('/:bid', blogsControllers.getBlogById);
 
 router.get('/user/:uid', blogsControllers.getBlogsByUserId);
+
+router.use(checkAuth);
 
 router.post(
 	'/',
