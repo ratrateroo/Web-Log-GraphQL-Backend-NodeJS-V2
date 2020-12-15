@@ -305,8 +305,8 @@ const updateBlog = async (req, res, next) => {
 		);
 		return next(error);
 	}
-
-	if (blog.creator !== req.userData.userId) {
+	//creator is ref object and needed to convert to string
+	if (blog.creator.toString() !== req.userData.userId) {
 		const error = new HttpError(
 			'You are not allowed to update this blog.',
 			401
@@ -360,6 +360,14 @@ const deleteBlog = async (req, res, next) => {
 
 	if (!blog) {
 		const error = new HttpError('Could not find blog for this id.', 404);
+		return next(error);
+	}
+
+	if (blog.creator.id !== req.userData.userId) {
+		const error = new HttpError(
+			'You are not allowed to delete this blog.',
+			401
+		);
 		return next(error);
 	}
 
