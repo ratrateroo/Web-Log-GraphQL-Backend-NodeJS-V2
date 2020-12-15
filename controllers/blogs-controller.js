@@ -305,7 +305,14 @@ const updateBlog = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	console.log(req.body);
+
+	if (blog.creator !== req.userData.userId) {
+		const error = new HttpError(
+			'You are not allowed to update this blog.',
+			401
+		);
+		return next(error);
+	}
 
 	// const newObject = {
 	// 	...blog,
