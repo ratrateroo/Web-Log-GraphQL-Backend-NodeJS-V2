@@ -269,8 +269,8 @@ const login = async (req, res, next) => {
 	}
 
 	res.status(201).json({
-		userId: createdUser.id,
-		email: createdUser.email,
+		userId: existingUser.id,
+		email: existingUser.email,
 		token: token,
 	});
 };
