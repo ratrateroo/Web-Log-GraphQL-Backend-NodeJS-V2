@@ -228,7 +228,6 @@ const createBlog = async (req, res, next) => {
 		category,
 		created,
 		edited,
-		creator,
 		content,
 		likes,
 		comments,
@@ -241,7 +240,7 @@ const createBlog = async (req, res, next) => {
 		category,
 		created,
 		edited,
-		creator,
+		creator: req.userData.userId,
 		content,
 		likes,
 		comments,
@@ -250,7 +249,7 @@ const createBlog = async (req, res, next) => {
 	let user;
 
 	try {
-		user = await User.findById(creator);
+		user = await User.findById(req.userData.userId);
 	} catch (err) {
 		const error = new HttpError(
 			'Creating blog failded, please try again',
