@@ -1,0 +1,7 @@
+{
+	"env": {
+		"DB_USER": "superuser",
+		"DB_PASSWORD": "superpassword12345",
+		"DB_NAME": "superdatabase"
+	}
+}
