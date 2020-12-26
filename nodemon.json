@@ -2,6 +2,8 @@
 	"env": {
 		"DB_USER": "superuser",
 		"DB_PASSWORD": "superpassword12345",
-		"DB_NAME": "superdatabase"
+		"DB_NAME": "superdatabase",
+		"API_KEY": "apikey123",
+		"JWT_KEY": "super_secret_key"
 	}
 }
