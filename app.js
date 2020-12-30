@@ -52,7 +52,7 @@ app.use((error, req, res, next) => {
 //const url = 'mongodb://127.0.0.1:27017';
 const url = 'mongodb://127.0.0.1:27017/weblogversion2?retryWrites=true';
 //const url = 'mongodb+srv://ratrateroo:ultrapassword@cluster0.yq5ix.mongodb.net/graphqldb?retryWrites=true&w=majority';
-const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.yq5ix.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+//const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.yq5ix.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 mongoose
 	.connect(url, {
 		useNewUrlParser: true,
