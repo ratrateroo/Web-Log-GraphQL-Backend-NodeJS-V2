@@ -19,18 +19,6 @@ const User = require('../models/user');
 // 		blogs: [],
 // 		friends: [],
 // 	},
-// 	{
-// 		id: 'u1',
-// 		username: 'username1',
-// 		password: 'password',
-// 		email: 'user1@email.com',
-// 		firstname: 'Aurora',
-// 		middlename: 'Bar',
-// 		lastname: 'Nuts',
-// 		profileimage: '',
-// 		blogs: [],
-// 		friends: [],
-// 	},
 // ];
 
 const getUsers = async (req, res, next) => {

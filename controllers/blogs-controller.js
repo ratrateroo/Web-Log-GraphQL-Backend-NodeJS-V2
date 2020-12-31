@@ -7,141 +7,141 @@ const HttpError = require('../models/http-error');
 const image = 'image here';
 const Blog = require('../models/blog');
 const User = require('../models/user');
-const BLOGS = [
-	{
-		id: 'b1',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b2',
-		image: image,
-		title: 'Wizard of Oz',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b3',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b4',
-		image: image,
-		title: 'Wizard of Oz',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b5',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b6',
-		image: image,
-		title: 'Wizard of Oz',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b7',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u1',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b8',
-		image: image,
-		title: 'Wizard of Oz',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u2',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
+// const BLOGS = [
+// 	{
+// 		id: 'b1',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b2',
+// 		image: image,
+// 		title: 'Wizard of Oz',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b3',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b4',
+// 		image: image,
+// 		title: 'Wizard of Oz',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b5',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b6',
+// 		image: image,
+// 		title: 'Wizard of Oz',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b7',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u1',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b8',
+// 		image: image,
+// 		title: 'Wizard of Oz',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u2',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
 
-	{
-		id: 'b9',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u2',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b10',
-		image: image,
-		title: 'Wizard of Oz',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u2',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-	{
-		id: 'b11',
-		image: image,
-		title: 'The Throne of the Sphinx',
-		author: 'Aurora Barnuts',
-		category: 'Javascript',
-		created: 'Jan-14-12',
-		updated: 'Jan-14-12',
-		creator: 'u2',
-		content:
-			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
-	},
-];
+// 	{
+// 		id: 'b9',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u2',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b10',
+// 		image: image,
+// 		title: 'Wizard of Oz',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u2',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// 	{
+// 		id: 'b11',
+// 		image: image,
+// 		title: 'The Throne of the Sphinx',
+// 		author: 'Aurora Barnuts',
+// 		category: 'Javascript',
+// 		created: 'Jan-14-12',
+// 		updated: 'Jan-14-12',
+// 		creator: 'u2',
+// 		content:
+// 			'Sphinx of black quartz, judge my vow. Jackdaws love my big sphinx of quartz. Pack my box with five dozen liquor jugs. The quick onyx goblin jumps over the lazy dwarf.',
+// 	},
+// ];
 
 const getBlogs = async (req, res, next) => {
 	let blog;
